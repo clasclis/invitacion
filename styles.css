@@ -77,4 +77,18 @@ body {
     width: 500px;
     height: 750px;
   }
+
+  /* Layout para pantallas grandes */
+.container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+/* Layout para móviles (pantallas pequeñas) */
+@media only screen and (max-width: 600px) {
+  .container {
+    flex-direction: column; /* Apilar los elementos en vertical */
+  }
+}
 }
