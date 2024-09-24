@@ -1,94 +1,140 @@
 * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
 body, html {
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-family: Arial, sans-serif;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: url('https://64.media.tumblr.com/ce4beb95a5eda1a14775d320c393690b/039b0bb75906469d-e6/s2048x3072/ba70cafaace873df4c1b74a604d24daab89a84a2.gif') no-repeat center center fixed;
+    background-size: cover;
 }
 
-body {
-  background-image: url('https://64.media.tumblr.com/ce4beb95a5eda1a14775d320c393690b/039b0bb75906469d-e6/s2048x3072/ba70cafaace873df4c1b74a604d24daab89a84a2.gif');
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
 }
+
 
 .container {
-  perspective: 1000px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
+    perspective: 1000px; /* Enables 3D space for the card */
 }
 
 .card {
-  width: 90%;
-  max-width: 400px;
-  height: 60vh; /* Responsive height */
-  position: relative;
+    transition: transform 0.6s ease; /* Set a default transition for transform */
+    width: 6vw; /* Set card width to 60% of viewport width */
+    height: 70vh; /* Set card height to 70% of viewport height */
+    max-width: 450px; /* Set a max width for larger screens */
+    max-height: 600px; /* Set a max height for larger screens */
+    position: relative;
+    transition: transform 0.6s; /* Animation duration */
+    transform-style: preserve-3d; /* Preserve 3D space for children */
+  box-shadow: rgba(0, 0, 0, 0.8); /* Slight shadow */
 }
 
-.card-inner {
-  width: 100%;
-  height: 100%;
-  position: relative;
-  transition: transform 1.5s, box-shadow 1.5s; /* Slow flip and shadow animation */
-  transform-style: preserve-3d;
+.card.flipped {
+    transform: rotateY(180deg); /* Flips the card */
+  box-shadow: rgba(0, 0, 0, 0.8); /* Slight shadow */
 }
 
-.card-inner.is-flipped {
-  transform: rotateY(180deg); /* Flip on click */
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3); /* Shadow on flip */
+.card-front,
+.card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden; /* Hides back side when flipped */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  box-shadow: rgba(0, 0, 0, 0.8); /* Slight shadow */
 }
 
-.card-front, .card-back {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  backface-visibility: hidden;
-}
-
-.card-front img, .card-back img {
-  width: 100%;
-  height: 100%;
-  object-fit: contain; /* Ensures images are not cropped */
+.card-front img,
+.card-back img {
+    width: 90%; /* Make the image fill 90% of the card's width */
+    height: auto; /* Maintain aspect ratio */
+  box-shadow: rgba(0, 0, 0, 0.8); /* Slight shadow */
 }
 
 .card-back {
-  transform: rotateY(180deg);
+    transform: rotateY(180deg); /* Initially rotate back side */
+  box-shadow: rgba(0, 0, 0, 0.8); /* Slight shadow */
+  
 }
 
-/* Responsive Design */
-@media (min-width: 768px) {
-  .card {
-    width: 400px;
-    height: 600px;
-  }
+/* Media Queries for Responsiveness */
+@media (max-width: 768px) {
+    .card {
+        width: 85vw; /* Adjust card width for smaller screens */
+        height: 70vh; /* Keep height for consistency */
+    }
+
+    .card-front img,
+    .card-back img {
+        width: 90%; /* Fill the card width on smaller screens */
+        height: auto; /* Maintain aspect ratio */
+      box-shadow: rgba(0, 0, 0, 0.8); /* Slight shadow */
+    }
 }
 
-@media (min-width: 1024px) {
-  .card {
-    width: 500px;
-    height: 750px;
-  }
 
-  /* Layout para pantallas grandes */
-.container {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
+/* Modal Styles */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; 
+  z-index: 1000; /* Above other elements */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full screen */
+  height: 100%; /* Full screen */
+  background-color: rgba(0, 0, 0, 0.8); /* Background fade */
+  justify-content: center;
+  align-items: center;
 }
 
-/* Layout para móviles (pantallas pequeñas) */
-@media only screen and (max-width: 600px) {
-  .container {
-    flex-direction: column; /* Apilar los elementos en vertical */
-  }
+.modal-content {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  position: relative;
+  width: 90%;
+  max-width: 400px; /* Same size as the invitation card */
 }
+
+.modal-content img {
+  width: 100%; /* Image takes up full width */
+  height: auto;
+}
+
+.close-btn {
+  position: absolute;
+  top: 20px; /* Adjusted position */
+  right: 25px; /* Adjusted position */
+  font-size: 30px; /* Increased size */
+  cursor: pointer;
+  color: #f2a5c7; /* Change color to red for visibility */
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7); /* Add shadow for better visibility */
+}
+
+@media (min-width: 769px) {
+    .card {
+        width: 50vw; /* Adjust card width for larger screens */
+        height: 65vh; /* Adjust height for larger screens */
+    }
+  
+  .modal-content {
+    max-width: 500px;
+    
+    
+    
+    
 }
