@@ -89,16 +89,17 @@ body, html {
 
 /* Modal Styles */
 .modal {
-  display: none; /* Hidden by default */
-  position: fixed; 
-  z-index: 1000; /* Above other elements */
-  left: 0;
-  top: 0;
-  width: 100%; /* Full screen */
-  height: 100%; /* Full screen */
-  background-color: rgba(0, 0, 0, 0.8); /* Background fade */
-  justify-content: center;
-  align-items: center;
+    display: none; /* Hidden by default */
+    position: fixed; 
+    z-index: 1000; /* Above other elements */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full screen */
+    height: 100%; /* Full screen */
+    background-color: rgba(0, 0, 0, 0.8); /* Background fade */
+    justify-content: center;
+    align-items: center;
+    transition: display 0.3s; /* Add transition for smooth visibility change */
 }
 
 .modal-content {
